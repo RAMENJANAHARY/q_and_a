@@ -1,3 +1,4 @@
+import os
 import requests
 from bs4 import BeautifulSoup
 from flask import Flask, render_template, request, jsonify
@@ -7,6 +8,9 @@ from pypinyin import lazy_pinyin  # Import pypinyin for Pinyin conversion
 
 # Create Flask app instance
 app = Flask(__name__)
+
+# Retrieve the API key from environment variables or set it directly
+api_key = os.getenv('API_KEY', 'AIzaSyDqCDyxp5Kg46e33wm2x6V7Dj9f5RfFQzw')  # Replace with your actual API key
 
 # Initialize Google Translator
 translator = Translator()
@@ -2198,3 +2202,4 @@ def get_questions():
 # Run the app
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
+
