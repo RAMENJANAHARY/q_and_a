@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q&A Application</title>
+    <style>
+        body {
+            background-color: green;
+            color: white;
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        h2 {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 1.5em;
+        }
+        form {
+            text-align: center;
+            margin-top: 20px;
+        }
+        input[type="text"] {
+            padding: 10px;
+            width: 80%;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #fff;
+        }
+        input[type="submit"] {
+            padding: 10px 20px;
+            background-color: white;
+            color: green;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        input[type="submit"]:hover {
+            background-color: lightgray;
+        }
+        #suggestions {
+            margin-top: 10px;
+            background-color: lightgray;
+            color: black;
+            padding: 10px;
+            border-radius: 5px;
+            width: 80%;
+            margin: auto;
+            text-align: center;
+            display: none;
+        }
+        .suggestion-item {
+            padding: 5px;
+            cursor: pointer;
+            border-bottom: 1px solid #ccc;
+        }
+        .suggestion-item:hover {
+            background-color: #ddd;
+        }
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            color: white;
+            font-size: 0.9em;
+        }
+        footer a {
+            color: lightblue;
+            text-decoration: none;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+        footer p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Question and Answer</h1>
+    <h2>ENGLISH - MALAGASY - GERMAN - CHINESE</h2>
+
+    <form method="POST" action="/qa">
+        <input type="text" id="question-input" name="question" placeholder="Type your question here..." required>
+        <input type="submit" value="Get Answer">
+    </form>
+
+    <div id="suggestions"></div>
+
+    <footer>
+        <p>Contact Information:</p>
+        <p>📱 WhatsApp: <a href="https://wa.me/261342321536">+261 34 23 215 36</a></p>
+        <p>📞 Phone number: <a href="tel:+261326027711">+261 32 60 277 11</a></p>
+        <p>✉️ Email: <a href="mailto:ramenjanahary129@gmail.com">ramenjanahary129@gmail.com</a></p>
+        <p>📘 Facebook: <a href="https://www.facebook.com/daphane.hsaa" target="_blank">Daphane Hsa</a></p>
+    </footer>
+
+    <script>
+        const questionInput = document.getElementById('question-input');
+        const suggestionsDiv = document.getElementById('suggestions');
+
+        let previousQuestions = [];
+
+        questionInput.addEventListener('input', function() {
+            const input = questionInput.value;
+
+            // Clear previous suggestions
+            suggestionsDiv.innerHTML = '';
+            suggestionsDiv.style.display = 'none';
+
+            if (input.length > 0) {
+                const filteredQuestions = previousQuestions.filter(question => 
+                    question.toLowerCase().includes(input.toLowerCase())
+                );
+
+                if (filteredQuestions.length > 0) {
+                    filteredQuestions.forEach(question => {
+                        const suggestionItem = document.createElement('div');
+                        suggestionItem.classList.add('suggestion-item');
+                        suggestionItem.textContent = question;
+                        suggestionItem.onclick = function() {
+                            questionInput.value = this.textContent;
+                        };
+                        suggestionsDiv.appendChild(suggestionItem);
+                    });
+                    suggestionsDiv.style.display = 'block';
+                }
+            }
+        });
+
+        // Add submitted questions to previousQuestions array
+        document.querySelector('form').addEventListener('submit', function(event) {
+            const question = questionInput.value;
+            if (!previousQuestions.includes(question)) {
+                previousQuestions.push(question);
+            }
+        });
+    </script>
+</body>
+</html>
