@@ -56,12 +56,16 @@
     <div class="answer-box">
         {% if question_translation %}
             <p><strong>Question (Malagasy):</strong> {{ question_translation.malagasy }}</p>
+            <p><strong>Question (French):</strong> {{ question_translation.french }}</p>
             <p><strong>Question (German):</strong> {{ question_translation.german }}</p>
+            <p><strong>Question (Spanish):</strong> {{ question_translation.spanish }}</p>
         {% endif %}
         {% if answer %}
             <p><strong>English:</strong> {{ answer }}</p>
             <p><strong>Malagasy:</strong> {{ malagasy_translation }}</p>
+            <p><strong>French:</strong> {{ french_translation }}</p>
             <p><strong>German:</strong> {{ german_translation }}</p>
+            <p><strong>Spanish:</strong> {{ spanish_translation }}</p>
             {% if chinese_translation %}
                 <p><strong>Chinese (Characters):</strong> {{ chinese_translation }}</p>
             {% endif %}
