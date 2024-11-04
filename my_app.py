@@ -2427,7 +2427,9 @@ def index():
 def qa():
     answer = None
     malagasy_translation = None
+    french_translation = None
     german_translation = None
+    spanish_translation = None
     question_translation = None
     chinese_translation = None
     chinese_pinyin = None
@@ -2438,19 +2440,26 @@ def qa():
 
         if answer:
             malagasy_translation = translate_text(answer, 'mg')
+            french_translation = translate_text(answer, 'fr')
             german_translation = translate_text(answer, 'de')
+            spanish_translation = translate_text(answer, 'es')
+
             question_translation = {
                 'malagasy': translate_text(question, 'mg'),
-                'german': translate_text(question, 'de')
-            }
+                'french': translate_text(question, 'fr'),
+                'german': translate_text(question, 'de'),
+                'spanish': translate_text(question, 'es'),
+           }
             # Translate to Chinese
             chinese_translation = translate_text(answer, 'zh-cn')  # Simplified Chinese
             chinese_pinyin = ' '.join(lazy_pinyin(chinese_translation))  # Convert Chinese translation to Pinyin
 
     return render_template('qa.html', 
                            answer=answer, 
-                           malagasy_translation=malagasy_translation, 
+                           malagasy_translation=malagasy_translation,
+                           french_translation=french_translation, 
                            german_translation=german_translation, 
+                           spanish_translation=spanish_translation, 
                            question_translation=question_translation,
                            chinese_translation=chinese_translation,
                            chinese_pinyin=chinese_pinyin)
@@ -2467,4 +2476,3 @@ if __name__ == '__main__':
     # Use the PORT environment variable or default to 5000 for local testing
     port = int(os.environ.get("PORT", 5000))
     app.run(host='0.0.0.0', port=port, debug=True)
-
