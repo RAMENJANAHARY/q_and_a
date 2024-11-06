@@ -2444,7 +2444,7 @@ def index():
         mail.send(msg)
 
         # Send welcome email to the new user
-        welcome_msg = Message(subject='Welcome to PTC #POLYGOT TRAINING CENTER',
+        welcome_msg = Message(subject='Welcome to PTC #POLYGLOT TRAINING CENTER',
                               recipients=[email])  # New user's email
         welcome_msg.body = f'Dear {name},\n\nWelcome to PTC #POLYGOT TRAINING CENTER!\nWe\'re excited to have you onboard.'
         mail.send(welcome_msg)
