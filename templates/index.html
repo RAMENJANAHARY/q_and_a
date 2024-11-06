@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Q&A</title>
     <style>
+        /* Styles for Q&A page */
         body {
             background-image: url("static/images/background.jpg");
             background-size: cover;
@@ -12,13 +13,14 @@
             font-family: Arial, sans-serif;
             margin: 20px;
         }
-        h1 {
+        h1, h2 {
             text-align: center;
+        }
+        h1 {
             font-size: 2.5em;
             margin-bottom: 10px;
         }
         h2 {
-            text-align: center;
             margin-top: 10px;
             font-size: 1.5em;
         }
@@ -26,12 +28,12 @@
             text-align: center;
             margin-top: 20px;
         }
-        input[type="text"] {
-            padding: 10px;
+        input[type="text"], input[type="email"], textarea {
             width: 80%;
-            margin-bottom: 10px;
+            padding: 10px;
             border-radius: 5px;
             border: 1px solid #fff;
+            margin-bottom: 10px;
         }
         input[type="submit"] {
             padding: 10px 20px;
@@ -41,28 +43,10 @@
             border-radius: 5px;
             cursor: pointer;
             font-weight: bold;
+            font-size: 14px;
         }
         input[type="submit"]:hover {
             background-color: lightgray;
-        }
-        #suggestions {
-            margin-top: 10px;
-            background-color: lightgray;
-            color: black;
-            padding: 10px;
-            border-radius: 5px;
-            width: 80%;
-            margin: auto;
-            text-align: center;
-            display: none;
-        }
-        .suggestion-item {
-            padding: 5px;
-            cursor: pointer;
-            border-bottom: 1px solid #ccc;
-        }
-        .suggestion-item:hover {
-            background-color: #ddd;
         }
         footer {
             margin-top: 40px;
@@ -80,6 +64,34 @@
         footer p {
             margin: 5px 0;
         }
+        /* Styles for Registration form in footer */
+        #registration-form {
+            max-width: 250px;
+            margin: 20px auto;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .section-title {
+            font-size: 1.5em;
+            text-align: center;
+            margin-top: 30px;
+        }
+        .section-content {
+            font-size: 1em;
+            margin: 20px;
+            text-align: justify;
+        }
+        .advertisement {
+            background-color: #f1f1f1;
+            color: #333;
+            padding: 20px;
+            border-radius: 5px;
+            margin-top: 30px;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -92,6 +104,42 @@
     </form>
 
     <div id="suggestions"></div>
+
+    <!-- Quality Section -->
+    <div class="section-title">Quality of Service</div>
+    <div class="section-content">
+        <p>Our Q&A service aims to deliver high-quality, reliable, and accurate answers to users in multiple languages, ensuring accessibility for a wide audience. We strive to provide clear, concise, and well-researched information for every question asked, ensuring user satisfaction and trust in the platform.</p>
+    </div>
+
+    <!-- Privacy Section -->
+    <div class="section-title">Privacy</div>
+    <div class="section-content">
+        <p>We value your privacy. Your questions and personal details are securely stored and used solely for the purpose of providing answers. We ensure that your data is not shared with third parties without your consent. We are committed to safeguarding your privacy while offering the best possible service.</p>
+    </div>
+
+    <!-- Advantage of QA Section -->
+    <div class="section-title">Advantage of Using Q&A</div>
+    <div class="section-content">
+        <p>Our Q&A service is able to translate questions and answers in six languages: English, Malagasy, French, German, Spanish, and Chinese. This makes it a powerful platform for those who want to become polyglots and for learners of all types, providing them with the flexibility to interact in multiple languages.</p>
+    </div>
+
+    <!-- Advertisement Section -->
+    <div class="advertisement">
+        <h3>Join Our Community!</h3>
+        <p>Sign up now to get access to personalized answers and be part of our global community of learners. Our platform offers you the ability to ask questions in multiple languages and get answers quickly and accurately. Don’t miss out on being part of a growing network!</p>
+        <a href="#registration-form"><button>Register Now</button></a>
+    </div>
+
+    <!-- Registration Form -->
+    <div id="registration-form">
+        <h2>Register</h2>
+        <form method="POST" action="/">
+            <input type="text" name="name" placeholder="Full Name" required>
+            <input type="email" name="email" placeholder="Email Address" required>
+            <textarea name="message" placeholder="Send a message to the Mail username"></textarea>
+            <input type="submit" value="Register">
+        </form>
+    </div>
 
     <footer>
         <p>Explore our vocabulary resources: <a href="https://vocab-website.onrender.com" target="_blank">Visit Vocab Website</a></p>
@@ -112,7 +160,6 @@
         questionInput.addEventListener('input', function() {
             const input = questionInput.value;
 
-            // Clear previous suggestions
             suggestionsDiv.innerHTML = '';
             suggestionsDiv.style.display = 'none';
 
@@ -136,7 +183,6 @@
             }
         });
 
-        // Add submitted questions to previousQuestions array
         document.querySelector('form').addEventListener('submit', function(event) {
             const question = questionInput.value;
             if (!previousQuestions.includes(question)) {
