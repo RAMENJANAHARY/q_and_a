@@ -1,13 +1,24 @@
 import os
 import requests
 from bs4 import BeautifulSoup
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, redirect, url_for, jsonify
+from flask_mail import Mail, Message
 from googletrans import Translator
 from requests.exceptions import ReadTimeout
 from pypinyin import lazy_pinyin  # Import pypinyin for Pinyin conversion
 
 # Create Flask app instance
 app = Flask(__name__)
+
+# Configure Flask-Mail
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app.config['MAIL_PORT'] = 587
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USERNAME'] = 'ramenjanahary129@gmail.com'  # Your email
+app.config['MAIL_PASSWORD'] = 'xqyx bkvc dwdr xbtv'          # Your password
+app.config['MAIL_DEFAULT_SENDER'] = 'ramenjanahary129@gmail.com'
+
+mail = Mail(app)
 
 # Retrieve the API key from environment variables or set it directly
 api_key = os.getenv('API_KEY', 'AIzaSyDqCDyxp5Kg46e33wm2x6V7Dj9f5RfFQzw')  # Replace with your actual API key
@@ -2417,10 +2428,40 @@ def scrape_stackoverflow2():
                 qa_data[title] = link
 
 # Home route
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def index():
     scrape_stackoverflow2()
+    
+    if request.method == 'POST':
+        name = request.form['name']
+        email = request.form['email']
+        message = request.form['message']
+
+        # Send registration notification to admin (your email)
+        msg = Message(subject='New Registration',
+                      recipients=['ramenjanahary129@gmail.com'],  # Admin email
+                      body=f'New registration: {name}, {email}, Message: {message}')
+        mail.send(msg)
+
+        # Send welcome email to the new user
+        welcome_msg = Message(subject='Welcome to PTC #POLYGOT TRAINING CENTER',
+                              recipients=[email])  # New user's email
+        welcome_msg.body = f'Dear {name},\n\nWelcome to PTC #POLYGOT TRAINING CENTER!\nWe\'re excited to have you onboard.'
+        mail.send(welcome_msg)
+
+        return redirect(url_for('thank_you'))
+
     return render_template('index.html', questions=qa_data)
+
+# Thank you route
+@app.route('/thank_you')
+def thank_you():
+    return '<h1>Thank you for registering! A welcome email has been sent to you.</h1>'
+
+# Polyglot route
+@app.route('/Polyglot')
+def polyglot():
+    return render_template('Polyglot.html')
 
 # Route to handle Q&A translations and responses
 @app.route('/qa', methods=['GET', 'POST'])
