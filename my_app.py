@@ -2446,7 +2446,31 @@ def index():
         # Send welcome email to the new user
         welcome_msg = Message(subject='Welcome to PTC #POLYGLOT TRAINING CENTER',
                               recipients=[email])  # New user's email
-        welcome_msg.body = f'Dear {name},\n\nWelcome to PTC #POLYGLOT TRAINING CENTER!\nWe\'re excited to have you onboard.'
+        welcome_msg.body = f"""Dear {name},
+
+Welcome to PTC - Polyglot Training Center!
+We're excited to have you onboard.
+
+Courses Offered at PTC
+At PTC - Polyglot Training Center, we offer a variety of language courses designed to broaden your linguistic skills and enhance your global communication abilities. Our courses include:
+
+- English
+- French
+- Spanish
+- Italian
+- German
+- Chinese
+- Malagasy
+- Portuguese
+- Dutch
+
+We invite you to explore these offerings and select the language that aligns best with your personal or professional goals. Whether you're aiming to master a new language or deepen your existing knowledge, our courses are structured to support your journey every step of the way.
+
+We look forward to supporting you on this exciting path to becoming multilingual!
+
+Best regards,  
+PTC - Polyglot Training Center Team
+"""
         mail.send(welcome_msg)
 
         return redirect(url_for('thank_you'))
