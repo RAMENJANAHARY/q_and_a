@@ -14,7 +14,7 @@
     <style>
         /* Styles for Q&A page */
         body {
-            background-image: url("static/images/background.jpg");
+            background-image: url("http://127.0.0.1:5000/static/images/background.jpg");
             background-size: cover;
             color: white;
             font-family: Arial, sans-serif;
@@ -75,7 +75,7 @@
         #registration-form {
             max-width: 250px;
             margin: 20px auto;
-            background: rgba(255, 255, 255, 0.9);
+            background: #9370DB;
             padding: 15px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -92,12 +92,54 @@
             text-align: justify;
         }
         .advertisement {
-            background-color: #f1f1f1;
+            background-color: #FFDAB9;
             color: #333;
             padding: 20px;
             border-radius: 5px;
             margin-top: 30px;
             text-align: center;
+        }
+        /* Gallery styling with animation */
+        .gallery {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            width: 100%;
+            max-width: 80%;
+            margin: 30px auto;
+            border-radius: 10px;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        .gallery-images {
+            display: flex;
+            animation: slide 30s infinite linear;
+        }
+        .gallery img {
+            width: 300px;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin-right: 20px;
+        }
+
+        /* Animation for sliding images */
+        @keyframes slide {
+            0% {
+                transform: translateX(0);
+            }
+            25% {
+                transform: translateX(-100%);
+            }
+            50% {
+                transform: translateX(-200%);
+            }
+            75% {
+                transform: translateX(-300%);
+            }
+            100% {
+                transform: translateX(0);
+            }
         }
     </style>
 </head>
@@ -118,10 +160,12 @@
         <p>Our Q&A service aims to deliver high-quality, reliable, and accurate answers to users in multiple languages, ensuring accessibility for a wide audience. We strive to provide clear, concise, and well-researched information for every question asked, ensuring user satisfaction and trust in the platform.</p>
     </div>
 
-    <!-- Privacy Section -->
-    <div class="section-title">Privacy</div>
+    <!-- How to Use Q&A Section -->
+    <div class="section-title">How to Use the Q&A Feature</div>
     <div class="section-content">
-        <p>We value your privacy. Your questions and personal details are securely stored and used solely for the purpose of providing answers. We ensure that your data is not shared with third parties without your consent. We are committed to safeguarding your privacy while offering the best possible service.</p>
+        <p>To start, type your question in English in the search bar provided. After entering your question, initiate the search process. The system will automatically translate your question into multiple languages, including Malagasy, French, German, Spanish, and Chinese.</p>
+        <p>In addition to translating your question, the system will also provide relevant answers in each of these languages: English, Malagasy, French, German, Spanish, and Chinese. This multilingual functionality allows you to access the information in the language you are most comfortable with, making it easier to gain insights and deepen your understanding of the topic.</p>
+        <p>By utilizing this Q&A feature, you can seamlessly bridge language barriers and obtain responses across multiple languages, creating a more inclusive and comprehensive experience.</p>
     </div>
 
     <!-- Advantage of QA Section -->
@@ -130,11 +174,27 @@
         <p>Our Q&A service is able to translate questions and answers in six languages: English, Malagasy, French, German, Spanish, and Chinese. This makes it a powerful platform for those who want to become polyglots and for learners of all types, providing them with the flexibility to interact in multiple languages.</p>
     </div>
 
+   <!-- Privacy Section -->
+    <div class="section-title">Privacy</div>
+    <div class="section-content">
+        <p>We value your privacy. Your questions and personal details are securely stored and used solely for the purpose of providing answers. We ensure that your data is not shared with third parties without your consent. We are committed to safeguarding your privacy while offering the best possible service.</p>
+    </div>
+
     <!-- Advertisement Section -->
     <div class="advertisement">
         <h3>Join Our Community!</h3>
         <p>Sign up now to get access to personalized answers and be part of our global community of learners. Our platform offers you the ability to ask questions in multiple languages and get answers quickly and accurately. Don’t miss out on being part of a growing network!</p>
         <a href="#registration-form"><button>Register Now</button></a>
+    </div>
+
+    <!-- Gallery Section -->
+    <div class="gallery">
+        <div class="gallery-images">
+            <img src="static/images/image1.jpg" alt="Image 1">
+            <img src="static/images/image2.jpg" alt="Image 2">
+            <img src="static/images/image3.jpg" alt="Image 3">
+            <img src="static/images/image4.jpg" alt="Image 4">
+        </div>
     </div>
 
     <!-- Registration Form -->
